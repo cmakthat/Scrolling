@@ -9,6 +9,8 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *loginBottomConstraint;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -18,14 +20,34 @@
     [super viewDidLoad];
     
     [self.navigationController setNavigationBarHidden:YES];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (IBAction)learnMoreAction:(id)sender {
     
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"TutorialViewController"];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self performSegueWithIdentifier:@"tutorialSegue" sender:nil];
 }
 
+- (void)keyboardWillAppear:(NSNotification*)notification{
+    
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSLog(@"%@", NSStringFromCGRect(keyboardFrame));
+    self.loginBottomConstraint.constant = keyboardFrame.size.height;
+    [self.view layoutIfNeeded];
+    
+    CGPoint bottomPoint = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+    [self.scrollView setContentOffset:bottomPoint animated:YES];
+}
+
+- (void)keyboardWillDisappear:(NSNotification*)notification{
+    
+    self.loginBottomConstraint.constant = 20;
+    [self.view layoutIfNeeded];
+    CGPoint topPoint = CGPointMake(0, 0);
+    [self.scrollView setContentOffset:topPoint animated:YES];
+}
 
 @end
