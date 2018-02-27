@@ -96,6 +96,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="dz5-lT-mNK"/>
+                    <connections>
+                        <outlet property="scrollView" destination="VIP-HB-3wm" id="RdE-VB-xl7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -122,6 +125,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DcU-ak-y7E"/>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="UtQ-pX-knU" id="nm5-R3-Tmv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O3N-3I-hTF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
