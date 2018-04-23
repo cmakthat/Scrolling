@@ -10,4 +10,6 @@
 
 @interface TutorialViewController : UIViewController
 
+@property (strong, nonatomic) NSString* sendInfoOver;
+
 @end
